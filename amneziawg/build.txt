@@ -1,0 +1,25 @@
+docker buildx build \
+  --no-cache \
+  --progress=plain \
+  --platform linux/amd64 \
+  --output=type=docker \
+  --tag docker-amneziawg:0.2.19 . && \
+docker save docker-amneziawg:0.2.19 > docker-amneziawg-amd64.tar
+
+
+docker buildx build \
+  --no-cache \
+  --progress=plain \
+  --platform linux/arm64 \
+  --output=type=docker \
+  --tag docker-amneziawg:0.2.19 . && \
+docker save docker-amneziawg:0.2.19 > docker-amneziawg-arm64.tar
+
+
+docker buildx build \
+  --no-cache \
+  --progress=plain \
+  --platform linux/arm/7 \
+  --output=type=docker \
+  --tag docker-amneziawg:0.2.19 . && \
+docker save docker-amneziawg:0.2.19 > docker-amneziawg-arm.tar

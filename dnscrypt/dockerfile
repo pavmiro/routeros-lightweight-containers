@@ -1,0 +1,16 @@
+FROM alpine:latest
+
+RUN apk add --no-cache dnscrypt-proxy
+
+RUN sed -i \
+    -e "s/^# server_names = .*scaleway-fr.*/server_names = \['google'\]/" \
+    -e "s/^listen_addresses = .*127.0.0.1:53.*/listen_addresses = \['0.0.0.0:53'\]/" \
+    /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+
+RUN sed -i '/\[monitoring_ui\]/,/^\[/ { \
+    s/enabled = false/enabled = true/; \
+    s/listen_address = "127.0.0.1:8080"/listen_address = "0.0.0.0:8080"/; \
+    s/username = "admin"/username = ""/ \
+}' /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+
+CMD ["dnscrypt-proxy","-config", "/etc/dnscrypt-proxy/dnscrypt-proxy.toml"]

@@ -1,0 +1,23 @@
+FROM alpine:latest AS build
+
+RUN apk add --no-cache git
+RUN git clone https://github.com/itsarts1/PyKMS
+
+RUN printf '%s\n' \
+    "import signal" \
+    "import sys" \
+    "" \
+    "def graceful_shutdown(signum, frame):" \
+    "    sys.exit(0)" \
+    "" \
+    "signal.signal(signal.SIGTERM, graceful_shutdown)" \
+    "" \
+    | cat - /PyKMS/server.py > /server.py \
+    && mv /server.py /PyKMS/server.py
+
+FROM python:3.13-alpine
+
+COPY --from=build /PyKMS /usr/PyKMS
+
+WORKDIR /usr/PyKMS
+CMD ["python", "server.py"]

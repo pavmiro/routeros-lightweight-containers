@@ -1,0 +1,49 @@
+FROM alpine:latest AS build
+
+RUN apk add --no-cache go git make linux-headers
+
+RUN git clone https://github.com/amnezia-vpn/amneziawg-tools.git && \
+    git clone https://github.com/amnezia-vpn/amneziawg-go.git
+
+RUN cd amneziawg-tools/src && make
+RUN cd amneziawg-go && make
+
+RUN mkdir -p /tmp/build/usr/bin/ \
+    && mv amneziawg-go/amneziawg-go /tmp/build/usr/bin/amneziawg-go \
+    && mv amneziawg-tools/src/wg /tmp/build/usr/bin/awg \
+    && mv amneziawg-tools/src/wg-quick/linux.bash /tmp/build/usr/bin/awg-quick
+
+FROM alpine:latest
+
+RUN apk add --no-cache bash iptables iproute2 openresolv
+
+COPY --from=build /tmp/build/ /
+
+RUN echo "net.ipv4.ip_forward = 1" | tee -a /etc/sysctl.conf
+
+RUN cat <<'EOF' > /entrypoint.sh
+#!/bin/bash
+
+shutdown() {
+    awg-quick down /awg.conf 2>/dev/null || true
+    exit 0
+}
+trap shutdown SIGTERM SIGINT SIGQUIT
+
+if [ -f "/awg.conf" ]; then
+    awg-quick up /awg.conf || { exit 1; }
+else
+    echo "Configuration file /awg.conf not found."
+fi
+
+sleep infinity &
+wait $!
+EOF
+
+RUN chmod +x /entrypoint.sh
+
+## RouterOS 7.20
+# RUN apk add --no-cache iptables-legacy
+# RUN ln -sf /usr/sbin/iptables-legacy /usr/sbin/iptables
+
+ENTRYPOINT ["/entrypoint.sh"]

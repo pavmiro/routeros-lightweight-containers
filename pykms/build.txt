@@ -1,0 +1,25 @@
+docker buildx build \
+  --no-cache \
+  --progress=plain \
+  --platform linux/amd64 \
+  --output=type=docker \
+  --tag docker-pykms:1.0-30.01.25 . && \
+docker save docker-pykms:1.0-30.01.25 > docker-pykms-amd64.tar
+
+
+docker buildx build \
+  --no-cache \
+  --progress=plain \
+  --platform linux/arm64 \
+  --output=type=docker \
+  --tag docker-pykms:1.0-30.01.25 . && \
+docker save docker-pykms:1.0-30.01.25 > docker-pykms-arm64.tar
+
+
+docker buildx build \
+  --no-cache \
+  --progress=plain \
+  --platform linux/arm/7 \
+  --output=type=docker \
+  --tag docker-pykms:1.0-30.01.25 . && \
+docker save docker-pykms:1.0-30.01.25 > docker-pykms-arm.tar
