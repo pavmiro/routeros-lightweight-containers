@@ -4,7 +4,7 @@
  `https://github.com/dnscrypt/dnscrypt-proxy`
 - [PyKMS](#pykms) - KMS-сервер на базе PyKMS, корректно работает с записью ресурсов службы (SRV) в системе доменных имен (DNS), в результате клиенты могут автоматически обнаруживать узел KMS и активировать его без необходимости настройки.
   `https://github.com/itsarts1/PyKMS`
-- [AmneziaWG](#amneziawg) - альтернативная версия версия протокола Wireguard, использующая современные методы обфускации.
+- [AmneziaWG](#amneziawg) - альтернативная версия версия протокола Wireguard, использующая современные методы обфускации.  
   `https://github.com/amnezia-vpn/amneziawg-tools.git`  
   `https://github.com/amnezia-vpn/amneziawg-go`
 
