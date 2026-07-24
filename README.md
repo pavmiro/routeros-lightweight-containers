@@ -79,7 +79,8 @@ set domain=home.arpa. [find where address=192.168.88.0/24]
 # amneziawg
 
 ### 🏷️ Список обновлений  
-`13-jul-2026, alpine linux 3.24.1, amneziawg-go 0.2.19`
+`13-jul-2026, alpine linux 3.24.1, amneziawg-go 0.2.19`  
+`24-jul-2026, alpine linux 3.24.1, amneziawg-go 3.0.1`
 
 ### 🛠️ Особенности dockerfile и конфигурации
 В dockerfile производится клонирование и сборка:  
