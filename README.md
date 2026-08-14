@@ -82,7 +82,8 @@ set domain=home.arpa. [find where address=192.168.88.0/24]
 `13-jul-2026, alpine linux 3.24.1, amneziawg-go 0.2.19`  
 `24-jul-2026, alpine linux 3.24.1, amneziawg-go 3.0.1`  
 `03-aug-2026, alpine linux 3.24.1, amneziawg-go 3.0.3`  
-`09-aug-2026, alpine linux 3.24.1, amneziawg-go 3.0.20260805`
+`09-aug-2026, alpine linux 3.24.1, amneziawg-go 3.0.20260805`  
+`15-aug-2026, alpine linux 3.24.1, amneziawg-go 3.1.20260814`
 
 ### 🛠️ Особенности dockerfile и конфигурации
 В dockerfile производится клонирование и сборка:  
