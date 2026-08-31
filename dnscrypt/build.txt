@@ -3,8 +3,8 @@ docker buildx build \
   --progress=plain \
   --platform linux/amd64 \
   --output=type=docker \
-  --tag docker-dnscrypt:2.1.16-r0 . && \
-docker save docker-dnscrypt:2.1.16-r0 > docker-dnscrypt-amd64.tar
+  --tag docker-dnscrypt:2.1.18-r0 . && \
+docker save docker-dnscrypt:2.1.18-r0 > docker-dnscrypt-amd64.tar
 
 
 docker buildx build \
@@ -12,8 +12,8 @@ docker buildx build \
   --progress=plain \
   --platform linux/arm64 \
   --output=type=docker \
-  --tag docker-dnscrypt:2.1.16-r0 . && \
-docker save docker-dnscrypt:2.1.16-r0 > docker-dnscrypt-arm64.tar
+  --tag docker-dnscrypt:2.1.18-r0 . && \
+docker save docker-dnscrypt:2.1.18-r0 > docker-dnscrypt-arm64.tar
 
 
 docker buildx build \
@@ -21,5 +21,5 @@ docker buildx build \
   --progress=plain \
   --platform linux/arm/7 \
   --output=type=docker \
-  --tag docker-dnscrypt:2.1.16-r0 . && \
-docker save docker-dnscrypt:2.1.16-r0 > docker-dnscrypt-arm.tar
+  --tag docker-dnscrypt:2.1.18-r0 . && \
+docker save docker-dnscrypt:2.1.18-r0 > docker-dnscrypt-arm.tar

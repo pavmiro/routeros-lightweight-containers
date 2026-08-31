@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN apk add --no-cache dnscrypt-proxy
 
 RUN sed -i \
-    -e "s/^# server_names = .*scaleway-fr.*/server_names = \['google'\]/" \
+    -e "s/^# server_names = .*scaleway-fr.*/server_names = \['google','scaleway-fr'\]/" \
     -e "s/^listen_addresses = .*127.0.0.1:53.*/listen_addresses = \['0.0.0.0:53'\]/" \
     /etc/dnscrypt-proxy/dnscrypt-proxy.toml
 
