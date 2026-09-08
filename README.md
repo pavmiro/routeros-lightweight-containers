@@ -12,7 +12,8 @@
 
 ### 🏷️ Список обновлений  
 `13-jul-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.16-r0`  
-`31-aug-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.18-r0, добавлен scaleway-fr по протоколу DNSCRYPT`
+`31-aug-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.18-r0`  
+`08-sep-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.18-r1`
 
 ### 🛠️ Особенности dockerfile, изменения в конфигурации
 При сборке в файл `/etc/dnscrypt-proxy/dnscrypt-proxy.toml` внесены следующие правки:
