@@ -13,7 +13,8 @@
 ### 🏷️ Список обновлений  
 `13-jul-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.16-r0`  
 `31-aug-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.18-r0`  
-`08-sep-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.18-r1`
+`08-sep-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.18-r1`  
+`10-oct-2026, alpine linux 3.24.2, dnscrypt-proxy 2.1.18-r1`
 
 ### 🛠️ Особенности dockerfile, изменения в конфигурации
 При сборке в файл `/etc/dnscrypt-proxy/dnscrypt-proxy.toml` внесены следующие правки:
@@ -47,6 +48,9 @@ add name=dnscrypt file=docker-dnscrypt-arm64.tar root-dir=dnscrypt interface=vet
 set servers=10.0.0.2
 ```
 # pykms
+
+### 🏷️ Список обновлений  
+`10-oct-2026, alpine linux 3.24.2, python 3.13`
 
 Используется оригинальный код PyKMS из репозитория `https://github.com/itsarts1/PyKMS`  
 В `server.py` внесены изменения, позволяющие контейнеру корректно останавливаться по сигналу SIGTERM.
@@ -85,7 +89,8 @@ set domain=home.arpa. [find where address=192.168.88.0/24]
 `24-jul-2026, alpine linux 3.24.1, amneziawg-go 3.0.1`  
 `03-aug-2026, alpine linux 3.24.1, amneziawg-go 3.0.3`  
 `09-aug-2026, alpine linux 3.24.1, amneziawg-go 3.0.20260805`  
-`15-aug-2026, alpine linux 3.24.1, amneziawg-go 3.1.20260814`
+`15-aug-2026, alpine linux 3.24.1, amneziawg-go 3.1.20260814`  
+`10-oct-2026, alpine linux 3.24.2, amneziawg-go 3.1.20260828`
 
 ### 🛠️ Особенности dockerfile и конфигурации
 В dockerfile производится клонирование и сборка:  
