@@ -1,4 +1,4 @@
-## Маленькие, лёгкие контейнеры для RouterOS 7.20 и 7.23+
+## Маленькие, лёгкие контейнеры для RouterOS 7.23+
 
 - [DNSCrypt-Proxy](#dnscrypt) - легковесный DNS-прокси с шифрованием, занимает минимум места и полностью готов к работе сразу после запуска.  
  `https://github.com/dnscrypt/dnscrypt-proxy`
@@ -8,13 +8,16 @@
   `https://github.com/amnezia-vpn/amneziawg-tools.git`  
   `https://github.com/amnezia-vpn/amneziawg-go`
 
+С 25 октября 2026 года, я больше не собираю контейнеры для RouterOS 7.20, так как текущие контейнеры и работа RouterOS 7.23/7.24 достаточно стабильны, чтобы продолжить работу только с ними.
+
 # dnscrypt
 
 ### 🏷️ Список обновлений  
 `13-jul-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.16-r0`  
 `31-aug-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.18-r0`  
 `08-sep-2026, alpine linux 3.24.1, dnscrypt-proxy 2.1.18-r1`  
-`10-oct-2026, alpine linux 3.24.2, dnscrypt-proxy 2.1.18-r1`
+`10-oct-2026, alpine linux 3.24.2, dnscrypt-proxy 2.1.18-r1`  
+`25-oct-2026, alpine linux 3.24.3, dnscrypt-proxy 2.1.18-r2`
 
 ### 🛠️ Особенности dockerfile, изменения в конфигурации
 При сборке в файл `/etc/dnscrypt-proxy/dnscrypt-proxy.toml` внесены следующие правки:
@@ -50,7 +53,8 @@ set servers=10.0.0.2
 # pykms
 
 ### 🏷️ Список обновлений  
-`10-oct-2026, alpine linux 3.24.2, python 3.13`
+`10-oct-2026, alpine linux 3.24.2, python 3.13`  
+`25-oct-2026, alpine linux 3.24.3, python 3.13`
 
 Используется оригинальный код PyKMS из репозитория `https://github.com/itsarts1/PyKMS`  
 В `server.py` внесены изменения, позволяющие контейнеру корректно останавливаться по сигналу SIGTERM.
@@ -90,7 +94,8 @@ set domain=home.arpa. [find where address=192.168.88.0/24]
 `03-aug-2026, alpine linux 3.24.1, amneziawg-go 3.0.3`  
 `09-aug-2026, alpine linux 3.24.1, amneziawg-go 3.0.20260805`  
 `15-aug-2026, alpine linux 3.24.1, amneziawg-go 3.1.20260814`  
-`10-oct-2026, alpine linux 3.24.2, amneziawg-go 3.1.20260828`
+`10-oct-2026, alpine linux 3.24.2, amneziawg-go 3.1.20260828`  
+`25-oct-2026, alpine linux 3.24.3, amneziawg-go 3.1.20260828`
 
 ### 🛠️ Особенности dockerfile и конфигурации
 В dockerfile производится клонирование и сборка:  
@@ -117,6 +122,9 @@ wait $!
 ```
 Файл конфигурации располагается в `/awg.conf`, который вы можете или создать самостоятельно `vi awg.conf` или добавить в `mounts`
 
+> [!WARNING]
+> В  AmneziaWG 3.0+ появились новые параметры. Параметр `HeaderProtectionKey` не работает в RouerOS.
+
 ### 🚀 Пример использования
 ```routeros
 /interface veth
@@ -126,19 +134,12 @@ add address=10.0.0.1/30 interface=veth1
 /container
 add name=amneziawg file=docker-amneziawg-arm64.tar root-dir=amneziawg interface=veth1
 
-# RouterOS 7.23
 /container
-set memory-high=256.0MiB mount=/awg.conf:/awg.conf:rw [find where name=amneziawg]
-
-# RouterOS 7.20
-/container mounts
-add name=amneziawg src=/awg.conf dst=/awg.conf
-/container
-set mounts=amneziawg [find where name=amneziawg]
+set memory-high=256.0MiB mount=/awg.conf:/awg.conf:ro [find where name=amneziawg]
 ```
+
 ### 📝 Пожалуйста обратите внимание!  
 Если необходимо указать правила для фаервола, то это можно сделать в файле `awg.conf`, например:
-
 ```
 [Interface]
 PostUp = iptables -t nat -A POSTROUTING -o awg -j MASQUERADE
